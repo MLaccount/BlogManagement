@@ -1,0 +1,20 @@
+package com.kickcity.task.blogmanagement;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+@EntityScan(basePackageClasses = {BlogManagementApplication.class, Jsr310JpaConverters.class})
+@EnableTransactionManagement
+@SpringBootApplication
+public class BlogManagementApplication  {
+
+    public static void main(String[] args) {
+        SpringApplication.run(BlogManagementApplication.class, args);
+    }
+
+}
