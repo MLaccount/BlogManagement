@@ -69,11 +69,6 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteUser(@PathVariable("id") long id) {
-        Optional<User> userOptional = userService.findUserById(id);
-        if (!userOptional.isPresent()) {
-            logger.error("User with id {} not found.", id);
-            throw new EntityNotFoundException("User with id " + id + " not found");
-        }
         userService.deleteUserById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
