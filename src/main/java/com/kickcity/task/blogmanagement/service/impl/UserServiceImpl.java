@@ -6,6 +6,7 @@ import com.kickcity.task.blogmanagement.repository.UserRepository;
 import com.kickcity.task.blogmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Optional<User> findUserById(Long id) {
@@ -35,7 +39,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         Assert.notNull(user, "User must not be null");
-        Assert.isNull(user.getId(), "New user must be provided at creation");
+        // Assert.isNull(user.getId(), "New user must be provided at creation");
+        Assert.notNull(user.getEmail(), "User email must not be null");
+        Assert.notNull(user.getPassword(), "User password must not be null");
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreateDate(Utils.getCurrentDate());
         userRepository.save(user);
     }

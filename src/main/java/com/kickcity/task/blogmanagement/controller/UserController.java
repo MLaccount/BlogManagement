@@ -28,17 +28,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //@PostMapping("/user/create")
     @PostMapping("")
     public ResponseEntity<?> addUser(@RequestBody User user) {
         logger.info("Creating User : {}", user);
-        if (userService.findUserById(user.getId()) != null || userService.findUserByEmail(user.getEmail()) != null) {
+        if (userService.findUserById(user.getId()) != null && userService.findUserByEmail(user.getEmail()) != null) {
             logger.error("Unable to create. A User with name {} already exist", user.getEmail());
             throw new ResourceAlreadyExistException("Unable to create. A User with name " +
                     user.getEmail() + " already exists.");
         }
-
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
