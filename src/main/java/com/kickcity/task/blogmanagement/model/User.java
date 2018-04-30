@@ -3,6 +3,7 @@ package com.kickcity.task.blogmanagement.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +21,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(name = "create_date", nullable = false)
+    private LocalDateTime createDate;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Record> records = new HashSet<>();
@@ -51,6 +55,14 @@ public class User {
         this.password = password;
     }
 
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
     public Set<Record> getRecords() {
         return records;
     }
@@ -65,6 +77,7 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", createDate=" + createDate +
                 ", records=" + records +
                 '}';
     }

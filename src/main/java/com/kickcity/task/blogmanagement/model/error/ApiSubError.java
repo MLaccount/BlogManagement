@@ -1,4 +1,4 @@
-package com.kickcity.task.blogmanagement.model;
+package com.kickcity.task.blogmanagement.model.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
