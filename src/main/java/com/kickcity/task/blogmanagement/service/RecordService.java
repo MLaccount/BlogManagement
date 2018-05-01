@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface RecordService {
 
-    Optional<Record> findRecordById(Long id);
+    Record findRecordById(Long id);
 
-    void saveRecord(Record record);
+    Record saveRecord(Record record);
 
     Record updateRecord(Record record);
 

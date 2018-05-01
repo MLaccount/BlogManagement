@@ -13,7 +13,7 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column( nullable = false)
     private String title;
 
     private String text;
@@ -29,11 +29,11 @@ public class Record {
     public Record() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,8 +75,6 @@ public class Record {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
-                ", createDate=" + createDate +
-                ", user=" + user +
                 '}';
     }
 }

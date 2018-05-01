@@ -2,6 +2,7 @@ package com.kickcity.task.blogmanagement.exception.handler;
 
 import com.kickcity.task.blogmanagement.exception.NoContentFoundException;
 import com.kickcity.task.blogmanagement.exception.ResourceAlreadyExistException;
+import com.kickcity.task.blogmanagement.exception.ValidationException;
 import com.kickcity.task.blogmanagement.model.error.ApiError;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -37,6 +38,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);
     }
+
+    @ExceptionHandler(ValidationException.class)
+    protected ResponseEntity<Object> handleEntityNotFound(ValidationException ex) {
+        ApiError apiError = new ApiError(HttpStatus.UNPROCESSABLE_ENTITY);
+        apiError.setMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
