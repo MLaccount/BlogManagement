@@ -1,24 +1,33 @@
 package com.kickcity.task.blogmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "record")
+@ApiModel
 public class Record {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiParam(hidden = true)
+    @ApiModelProperty(hidden=true)
     private Long id;
-
+    @ApiParam
     @Column( nullable = false)
     private String title;
-
+    @ApiParam
     private String text;
 
     @Column(name = "create_date", nullable = false)
+    @ApiModelProperty(hidden=true)
     private LocalDateTime createDate;
 
     @ManyToOne
