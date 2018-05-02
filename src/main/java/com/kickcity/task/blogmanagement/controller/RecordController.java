@@ -1,5 +1,6 @@
 package com.kickcity.task.blogmanagement.controller;
 
+import com.kickcity.task.blogmanagement.exception.NoContentFoundException;
 import com.kickcity.task.blogmanagement.model.Record;
 import com.kickcity.task.blogmanagement.model.User;
 import com.kickcity.task.blogmanagement.service.RecordService;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +53,14 @@ public class RecordController {
     public ResponseEntity deleteRecord(@PathVariable("id") long id) {
         recordService.deleteRecordById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/listwithusers")
+    public List<Record> getRecord1(Pageable pageRequest) {
+        List<Record> recordList = recordService.findAllByUsers(pageRequest);
+        if (recordList.isEmpty()) {
+            throw new NoContentFoundException("No records found");
+        }
+        return recordList;
     }
 }

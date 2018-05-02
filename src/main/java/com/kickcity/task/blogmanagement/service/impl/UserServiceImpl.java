@@ -10,6 +10,8 @@ import com.kickcity.task.blogmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -78,10 +80,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUsers() {
-        //всех зарегистрировавшихся юзеров в порядке регистрации
-        //TODO add pagination
-        List<User> userList = userRepository.findAll(new Sort(Sort.Direction.DESC, "createDate"));
+    public List<User> findAllUsers(Pageable pageableRequest) {
+        Pageable pageable = PageRequest.of(pageableRequest.getPageNumber(), pageableRequest.getPageSize(), Sort.Direction.ASC, "createDate");
+        List<User> userList = userRepository.findAll(pageable).getContent();
+
         if (userList.isEmpty()) {
             throw new NoContentFoundException("No users found");
         }
@@ -104,7 +106,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(Long id) {
         validator.checkForNull(id, "UserId");
-
+//TODO
         if (!userRepository.existsById(id)) {
             logger.error("User with id {} not found.", id);
             throw new EntityNotFoundException("User with id " + id + " not found");

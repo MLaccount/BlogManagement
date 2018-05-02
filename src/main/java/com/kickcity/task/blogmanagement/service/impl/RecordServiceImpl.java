@@ -9,6 +9,7 @@ import com.kickcity.task.blogmanagement.service.RecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -83,5 +84,10 @@ public class RecordServiceImpl implements RecordService {
         }
         return recordList;
     }
+    @Override
+    public List<Record> findAllByUsers(Pageable pageRequest) {
+        return recordRepository.findAllByUsers(pageRequest);
+    }
+
 
 }

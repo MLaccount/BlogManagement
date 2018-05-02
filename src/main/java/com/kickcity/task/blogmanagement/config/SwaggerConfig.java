@@ -1,8 +1,6 @@
 package com.kickcity.task.blogmanagement.config;
 
 
-import com.kickcity.task.blogmanagement.model.Record;
-import com.kickcity.task.blogmanagement.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;

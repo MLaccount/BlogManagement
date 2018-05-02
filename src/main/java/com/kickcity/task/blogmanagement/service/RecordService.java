@@ -1,9 +1,9 @@
 package com.kickcity.task.blogmanagement.service;
 
 import com.kickcity.task.blogmanagement.model.Record;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RecordService {
 
@@ -16,5 +16,7 @@ public interface RecordService {
     void deleteRecordById(Long id);
 
     List<Record> findAllRecords();
+
+    List<Record> findAllByUsers(Pageable pageRequest);
 
 }
