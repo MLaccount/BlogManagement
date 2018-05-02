@@ -1,6 +1,5 @@
 package com.kickcity.task.blogmanagement.security;
 
-
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

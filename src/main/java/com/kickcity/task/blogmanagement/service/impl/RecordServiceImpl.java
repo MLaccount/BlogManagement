@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @Service
 public class RecordServiceImpl implements RecordService {
+
     private static final Logger logger = LoggerFactory.getLogger(RecordServiceImpl.class);
 
     @Autowired
@@ -46,7 +47,7 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public Record saveRecord(Record record) {
         validator.checkForNull(record, "Record");
-        validator.checkForNull(record.getTitle(),"Title");
+        validator.checkForNull(record.getTitle(), "Title");
         logger.info("Creating Record : {}", record);
 
         if (record.getId() == null) {
@@ -84,10 +85,10 @@ public class RecordServiceImpl implements RecordService {
         }
         return recordList;
     }
+
     @Override
     public List<Record> findAllByUsers(Pageable pageRequest) {
         return recordRepository.findAllByUsers(pageRequest);
     }
-
 
 }

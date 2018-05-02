@@ -2,10 +2,8 @@ package com.kickcity.task.blogmanagement.controller;
 
 import com.kickcity.task.blogmanagement.exception.NoContentFoundException;
 import com.kickcity.task.blogmanagement.model.Record;
-import com.kickcity.task.blogmanagement.model.User;
 import com.kickcity.task.blogmanagement.service.RecordService;
 import com.kickcity.task.blogmanagement.service.UserService;
-import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -106,7 +106,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(Long id) {
         validator.checkForNull(id, "UserId");
-//TODO
         if (!userRepository.existsById(id)) {
             logger.error("User with id {} not found.", id);
             throw new EntityNotFoundException("User with id " + id + " not found");

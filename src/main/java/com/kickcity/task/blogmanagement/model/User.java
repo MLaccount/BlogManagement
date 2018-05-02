@@ -1,7 +1,5 @@
 package com.kickcity.task.blogmanagement.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 
@@ -12,23 +10,26 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(hidden=true)
+    @ApiModelProperty(hidden = true)
     private Long id;
+
     @ApiParam
     @Column(unique = true, nullable = false)
     private String email;
+
     @ApiParam
     @Column(nullable = false)
     private String password;
-    @ApiModelProperty(hidden=true)
+
+    @ApiModelProperty(hidden = true)
     @Column(name = "create_date", nullable = false)
     private LocalDateTime createDate;
-    @ApiModelProperty(hidden=true)
+
+    @ApiModelProperty(hidden = true)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Record> records = new HashSet<>();
 
